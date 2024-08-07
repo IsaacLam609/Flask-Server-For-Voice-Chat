@@ -1,14 +1,12 @@
 import azure.cognitiveservices.speech as speechsdk
 from azure.cognitiveservices.speech import AudioDataStream
-
-# REMEMBER TO REMOVE KEY WHEN SHARING THE CODE
-SUBSCRIPTION = "your-key"
-REGION = "your-region"
+import azure_key
 
 text = "收到啦"
 
+
 def azure_text_to_speech(text):
-    speech_config = speechsdk.SpeechConfig(subscription=SUBSCRIPTION, region=REGION)
+    speech_config = speechsdk.SpeechConfig(subscription=azure_key.SUBSCRIPTION_KEY, region=azure_key.REGION)
     audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
 
     speech_config.speech_synthesis_voice_name = 'zh-HK-HiuMaanNeural'
@@ -29,8 +27,9 @@ def azure_text_to_speech(text):
     audio_data_stream = AudioDataStream(speech_synthesis_result)
     audio_data_stream.save_to_wav_file("tts_output.wav")
 
+
 def azure_speech_to_text():
-    speech_config = speechsdk.SpeechConfig(subscription=SUBSCRIPTION, region=REGION)
+    speech_config = speechsdk.SpeechConfig(subscription=azure_key.SUBSCRIPTION_KEY, region=azure_key.REGION)
     speech_config.speech_recognition_language = "zh-HK"
 
     audio_config = speechsdk.audio.AudioConfig(filename="user_audio.wav")
@@ -40,8 +39,7 @@ def azure_speech_to_text():
     print("Azure speech to text finished")
 
     if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
-        # print("Recognized: {}".format(speech_recognition_result.text))
-        print(speech_recognition_result.text)
+        print("Recognized: {}".format(speech_recognition_result.text))
     elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
         print("No speech could be recognized: {}".format(speech_recognition_result.no_match_details))
     elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
