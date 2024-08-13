@@ -1,13 +1,9 @@
 import paho.mqtt.client as mqtt
 
+import settings
+
 
 def mqtt_publish(topic, message):
-    # MQTT broker details
-    BROKER_HOST = "your-broker-url"  # Tailscale ipv4
-    BROKER_PORT = "your-port"              # default mqtt port
-    BROKER_USERNAME = "your-username"
-    BROKER_PASSWORD = "your-password"
-
     # Callback functions for MQTT client
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -25,11 +21,14 @@ def mqtt_publish(topic, message):
     # client.on_message = on_message
 
     # Set username and password
-    client.username_pw_set(BROKER_USERNAME, BROKER_PASSWORD)
+    client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
 
     # Connect to MQTT broker and publish message
-    client.connect(BROKER_HOST, BROKER_PORT, 60)
+    client.connect(settings.BROKER_HOST, settings.BROKER_PORT, 60)
     client.publish(topic, message)
     print("MQTT message published")
     client.disconnect()
     # client.loop_forever()
+
+
+# mqtt_publish("/voice_assistant/input", "testing")
