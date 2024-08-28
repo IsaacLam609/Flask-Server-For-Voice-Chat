@@ -21,7 +21,7 @@ def mqtt_publish(topic, message):
     # client.on_message = on_message
 
     # Set username and password
-    client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
+    # client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
 
     # Connect to MQTT broker and publish message
     client.connect(settings.BROKER_HOST, settings.BROKER_PORT, 60)
@@ -31,4 +31,4 @@ def mqtt_publish(topic, message):
     # client.loop_forever()
 
 
-# mqtt_publish("/voice_assistant/input", "testing")
+mqtt_publish("/alphamini", "testing")

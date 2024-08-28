@@ -1,9 +1,11 @@
+import time
+
 import paho.mqtt.client as mqtt
 
 import settings
 
-ASSISTANT_INPUT_TOPIC = "/voice_assistant/input"
-ASSISTANT_RESPONSE_TOPIC = "/voice_assistant/response"
+ASSISTANT_INPUT_TOPIC = "/alphamini/sendtoha"
+ASSISTANT_RESPONSE_TOPIC = "/alphamini/getfromha"
 
 
 def generate_response(message):
@@ -22,17 +24,17 @@ def generate_response(message):
     # Callback functions for MQTT client
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
-            print("Connected to MQTT broker!")
+            # print("Connected to MQTT broker!")
             client.subscribe(ASSISTANT_RESPONSE_TOPIC)
             client.publish(ASSISTANT_INPUT_TOPIC, message)
-            print("MQTT message published: ", message)
+            # print("MQTT message published: ", message)
         else:
             print("Failed to connect to MQTT broker, return code:", rc)
 
     def on_message(client, userdata, msg):
         nonlocal response_message
         response_message = msg.payload.decode()
-        print(f"Received message: {msg.payload.decode()}")
+        # print(f"Received message: {msg.payload.decode()}")
         client.loop_stop()
         client.disconnect()
 
@@ -42,7 +44,7 @@ def generate_response(message):
     client.on_message = on_message
 
     # Set username and password
-    client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
+    # client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
 
     # Connect to MQTT broker and publish message
     client.connect(settings.BROKER_HOST, settings.BROKER_PORT, 60)
@@ -52,4 +54,8 @@ def generate_response(message):
     return response_message
 
 
-# response = generate_response("講下其他書")
+# start = time.time()
+response = generate_response("hello")
+# end = time.time()
+# print(end-start)
+print(response)
