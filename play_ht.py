@@ -4,7 +4,7 @@ from pyht import Client, TTSOptions, Format
 # Play HT is an alternative for text to speech services
 
 # initialize the Play.ht client with your credentials
-client = Client("smY1a6IAN6NGRcOJaoHBt553OMx1", "adf7e1c41b0b457eb48ad170ad955476")
+client = Client("your-id", "your-key")
 
 # configure the TTS options
 options = TTSOptions(
