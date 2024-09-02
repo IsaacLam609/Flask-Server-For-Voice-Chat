@@ -34,7 +34,7 @@ def generate_response(message):
     def on_message(client, userdata, msg):
         nonlocal response_message
         response_message = msg.payload.decode()
-        # print(f"Received message: {msg.payload.decode()}")
+        print(f"Received message: {msg.payload.decode()}")
         client.loop_stop()
         client.disconnect()
 
@@ -44,7 +44,7 @@ def generate_response(message):
     client.on_message = on_message
 
     # Set username and password
-    # client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
+    client.username_pw_set(settings.BROKER_USERNAME, settings.BROKER_PASSWORD)
 
     # Connect to MQTT broker and publish message
     client.connect(settings.BROKER_HOST, settings.BROKER_PORT, 60)
@@ -52,10 +52,3 @@ def generate_response(message):
     # Loop until we get a response
     client.loop_forever()
     return response_message
-
-
-# start = time.time()
-response = generate_response("hello")
-# end = time.time()
-# print(end-start)
-print(response)

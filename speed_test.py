@@ -5,6 +5,8 @@ import azure_stt_tts
 
 
 def speech_to_speech_test():
+    """Tests the speed of different components of the speech service."""
+
     # speech to text
     stt_start_time = time.time()
     text = azure_stt_tts.azure_speech_to_text()

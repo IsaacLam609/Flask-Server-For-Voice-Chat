@@ -3,6 +3,15 @@ import azure_key
 
 
 def generate_response(text):
+    """
+    Gets a response for a given message using Azure OpenAI.
+
+    Args:
+        text (str): The input text.
+
+    Returns:
+        str: The response text.
+    """
     print("Generating response...")
     client = AzureOpenAI(
       azure_endpoint=azure_key.OPENAI_ENDPOINT,
@@ -19,8 +28,5 @@ def generate_response(text):
         ]
     )
 
-    # print(response.choices[0].message.content)
+    print(response.choices[0].message.content)
     return response.choices[0].message.content
-
-
-# print(generate_response("早晨！今日天氣好似幾熱，有D驚會中暑"))
