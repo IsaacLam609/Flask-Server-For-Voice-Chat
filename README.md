@@ -2,7 +2,7 @@
 
 ## Introduction
 This project focuses on developing a flask server which receives end user's audio message 
-sent from a humanoid robot, converts it to text (speech recognition), generates a text response 
+sent from a humanoid robot (or other devices), converts it to text (speech recognition), generates a text response 
 (using natural language processing) and plays the synthesized audio response (speech synthesis).
 It is also integrated with the Home Assistant platform to control smart home devices by sending MQTT messages.
 
